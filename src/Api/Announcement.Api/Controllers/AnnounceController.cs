@@ -1,5 +1,6 @@
 ﻿using Announcement.Application.Common.Contracts;
 using Announcement.Application.Common.Contracts.Queries;
+using Announcement.Application.Common.Services;
 using Announcement.Application.DTO;
 using Announcement.Domain.Entities;
 using AutoMapper;
@@ -50,20 +51,7 @@ namespace Announcement.Api.Controllers
                 return Ok(new PagedResponse<Announce>(postsResponce));
             }
 
-            var nextPage = paginationFilter.PageNumber >= 1 ? _uriService
-                .GetAllPostUri(new PaginationQuery(paginationFilter.PageNumber + 1, paginationFilter.PageSize)).ToString() : null;
-
-            var previousPage = paginationFilter.PageNumber - 1 >= 1 ? _uriService
-                .GetAllPostUri(new PaginationQuery(paginationFilter.PageNumber - 1, paginationFilter.PageSize)).ToString() : null;
-
-            var paginationResponce = new PagedResponse<Announce>
-            {
-                Data = postsResponce,
-                PageNumber = paginationFilter.PageNumber >= 1 ? paginationFilter.PageNumber : (int?)null,
-                PageSize = paginationFilter.PageSize >= 1 ? paginationFilter.PageSize : (int?)null,
-                NextPage = postsResponce.Any() ? nextPage : null,
-                PreviousPage = previousPage
-            };
+            var paginationResponce = PaginationService.CreatePaginatedResponse(_uriService, paginationFilter, postsResponce);
 
             return Ok(paginationResponce);
         }
