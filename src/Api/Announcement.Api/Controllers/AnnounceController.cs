@@ -4,6 +4,7 @@ using Announcement.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -34,6 +35,16 @@ namespace Announcement.Api.Controllers
         public async Task<ActionResult<IEnumerable<Announce>>> GetAllAnnounce()
         {
             var result = await _strategy.GetAllAnnounce();
+            return Ok(result);
+        }
+        [HttpGet("getAnnounceByName")]
+        public async Task<ActionResult<IEnumerable<Announce>>> GetByName(string name)
+        { 
+            var result = await _strategy.GetAnnouceByName(name);
+            if(result == null)
+            {
+                throw new Exception();
+            }
             return Ok(result);
         }
     }

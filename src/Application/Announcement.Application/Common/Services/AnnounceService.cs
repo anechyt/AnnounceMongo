@@ -1,6 +1,7 @@
 ﻿using Announcement.Application.Common.Contracts;
 using Announcement.Domain.Entities;
 using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,15 @@ namespace Announcement.Application.Common.Services
         }
         public async Task CreateAnnounce(Announce annouce)
         {
-            await _dbContext.Announces.InsertOneAsync(annouce);
+            FilterDefinition<Announce> filter = Builders<Announce>.Filter.Size("Photos", 3);
+            if(filter == null)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                await _dbContext.Announces.InsertOneAsync(annouce);
+            }
         }
 
         public async Task<IEnumerable<Announce>> GetAllAnnounce()
@@ -27,9 +36,10 @@ namespace Announcement.Application.Common.Services
             return await _dbContext.Announces.Find(a => true).SortByDescending(a => a.Price).SortByDescending(a => a.Date).ToListAsync();
         }
 
-        public Task<IEnumerable<Announce>> GetAnnouceByName()
+        public async Task<IEnumerable<Announce>> GetAnnouceByName(string name)
         {
-            throw new NotImplementedException();
+            FilterDefinition<Announce> filter = Builders<Announce>.Filter.ElemMatch(a => a.Name, name);
+            return await _dbContext.Announces.Find(filter).ToListAsync();
         }
     }
 }
