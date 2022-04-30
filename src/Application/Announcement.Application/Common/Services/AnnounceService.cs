@@ -20,25 +20,24 @@ namespace Announcement.Application.Common.Services
         }
         public async Task CreateAnnounce(Announce annouce)
         {
-            FilterDefinition<Announce> filter = Builders<Announce>.Filter.Size("Photos", 3);
-            if(filter == null)
-            {
-                throw new Exception();
-            }
-            else
-            {
                 await _dbContext.Announces.InsertOneAsync(annouce);
-            }
         }
 
-        public async Task<IEnumerable<Announce>> GetAllAnnounce()
+        public async Task<IEnumerable<Announce>> GetAllAnnounce(PaginationFilter paginationFilter = null)
         {
-            return await _dbContext.Announces.Find(a => true).SortByDescending(a => a.Price).SortByDescending(a => a.Date).ToListAsync();
+            if(paginationFilter == null)
+            {
+                return await _dbContext.Announces.Find(a => true).SortByDescending(a => a.Price).SortByDescending(a => a.Date).ToListAsync();
+            }
+
+            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+            return await _dbContext.Announces.Find(a => true).SortByDescending(a => a.Price).SortByDescending(a => a.Date)
+                .Skip(skip).Limit(paginationFilter.PageSize).ToListAsync();
         }
 
         public async Task<IEnumerable<Announce>> GetAnnouceByName(string name)
         {
-            FilterDefinition<Announce> filter = Builders<Announce>.Filter.ElemMatch(a => a.Name, name);
+            FilterDefinition<Announce> filter = Builders<Announce>.Filter.Where(a => a.Name == name);
             return await _dbContext.Announces.Find(filter).ToListAsync();
         }
     }
