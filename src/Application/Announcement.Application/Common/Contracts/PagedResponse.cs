@@ -2,10 +2,10 @@
 
 namespace Announcement.Application.Common.Contracts
 {
-    public class PagedResponce<T>
+    public class PagedResponse<T>
     {
-        public PagedResponce() { }
-        public PagedResponce(IEnumerable<T> data)
+        public PagedResponse() { }
+        public PagedResponse(IEnumerable<T> data)
         {
             Data = data;
         }

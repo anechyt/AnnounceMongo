@@ -1,4 +1,5 @@
 ﻿using Announcement.Application.Common.Contracts;
+using Announcement.Application.DTO;
 using Announcement.Domain.Entities;
 using AutoMapper;
 using MongoDB.Bson;
@@ -18,9 +19,10 @@ namespace Announcement.Application.Common.Services
         {
             _dbContext = dbContext;
         }
-        public async Task CreateAnnounce(Announce annouce)
+        public async Task<AnnounceResponse> CreateAnnounce(Announce annouce)
         {
-                await _dbContext.Announces.InsertOneAsync(annouce);
+            await _dbContext.Announces.InsertOneAsync(annouce);
+            return new AnnounceResponse();
         }
 
         public async Task<IEnumerable<Announce>> GetAllAnnounce(PaginationFilter paginationFilter = null)

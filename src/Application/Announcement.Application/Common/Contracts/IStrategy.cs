@@ -1,4 +1,5 @@
-﻿using Announcement.Domain.Entities;
+﻿using Announcement.Application.DTO;
+using Announcement.Domain.Entities;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace Announcement.Application.Common.Contracts
     {
         Task<IEnumerable<Announce>> GetAllAnnounce(PaginationFilter paginationFilter = null);
         Task<IEnumerable<Announce>> GetAnnouceByName(string name);
-        Task CreateAnnounce(Announce annouce);
+        Task<AnnounceResponse> CreateAnnounce(Announce annouce);
     }
 }

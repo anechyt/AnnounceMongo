@@ -9,6 +9,7 @@ namespace Announcement.Application.Common.Mapping
         public AnnounceProfile()
         {
             CreateMap<AnnounceDto, Announce>().ReverseMap();
+            CreateMap<Announce, AnnounceResponse>().ReverseMap();
         }
     }
 }

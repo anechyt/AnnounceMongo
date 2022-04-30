@@ -35,7 +35,7 @@ namespace Announcement.Api.Controllers
 
             var locationUri = _uriService.GetPostUri(map.Id.ToString());
 
-            return CreatedAtAction(nameof(CreateAnnounce), new { id = map.Id }, map);
+            return Ok(new AnnounceResponse { Id = map.Id});
         }
 
         [HttpGet("getallAnnounce")]
@@ -47,7 +47,7 @@ namespace Announcement.Api.Controllers
 
             if (paginationFilter == null || paginationFilter.PageNumber < 1 || paginationFilter.PageSize < 1)
             {
-                return Ok(new PagedResponce<Announce>(postsResponce));
+                return Ok(new PagedResponse<Announce>(postsResponce));
             }
 
             var nextPage = paginationFilter.PageNumber >= 1 ? _uriService
@@ -56,7 +56,7 @@ namespace Announcement.Api.Controllers
             var previousPage = paginationFilter.PageNumber - 1 >= 1 ? _uriService
                 .GetAllPostUri(new PaginationQuery(paginationFilter.PageNumber - 1, paginationFilter.PageSize)).ToString() : null;
 
-            var paginationResponce = new PagedResponce<Announce>
+            var paginationResponce = new PagedResponse<Announce>
             {
                 Data = postsResponce,
                 PageNumber = paginationFilter.PageNumber >= 1 ? paginationFilter.PageNumber : (int?)null,
