@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{E20794
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A6F65E51-570F-4AF5-9DCC-4CFAA9B76AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Announcement.Api", "src\Api\Announcement.Api\Announcement.Api.csproj", "{225B72E3-3ADD-4947-8113-21C7540C2395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Announcement.Api", "src\Api\Announcement.Api\Announcement.Api.csproj", "{225B72E3-3ADD-4947-8113-21C7540C2395}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Announcement.Application", "src\Application\Announcement.Application\Announcement.Application.csproj", "{2744B22D-4AD1-4EAF-AF0F-CE8BDAE742BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Announcement.Application", "src\Application\Announcement.Application\Announcement.Application.csproj", "{2744B22D-4AD1-4EAF-AF0F-CE8BDAE742BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Announcement.Dal", "src\Dal\Announcement.Dal\Announcement.Dal.csproj", "{FBCDAA97-C104-4AA6-A768-1D56CB8FA9F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Announcement.Dal", "src\Dal\Announcement.Dal\Announcement.Dal.csproj", "{FBCDAA97-C104-4AA6-A768-1D56CB8FA9F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Announcement.Domain", "src\Domain\Announcement.Domain\Announcement.Domain.csproj", "{A8C9D9A1-A8CD-425E-B56B-B284A654B8D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Announcement.Domain", "src\Domain\Announcement.Domain\Announcement.Domain.csproj", "{A8C9D9A1-A8CD-425E-B56B-B284A654B8D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
